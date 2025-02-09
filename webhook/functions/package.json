@@ -1,0 +1,35 @@
+{
+  "name": "functions",
+  "type": "module",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "22"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "@langchain/community": "^0.3.28",
+    "@langchain/core": "^0.3.37",
+    "@langchain/google-vertexai": "^0.1.8",
+    "@langchain/mongodb": "^0.1.0",
+    "@langchain/openai": "^0.4.2",
+    "axios": "^1.7.9",
+    "firebase-admin": "^13.0.2",
+    "firebase-functions": "^6.3.1",
+    "fs": "^0.0.1-security",
+    "langchain": "^0.3.15",
+    "mongodb": "^6.13.0",
+    "pdf-parse": "^1.1.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^3.4.0"
+  },
+  "private": true
+}
