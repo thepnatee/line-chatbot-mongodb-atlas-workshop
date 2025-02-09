@@ -14,19 +14,10 @@
   },
   "main": "index.js",
   "dependencies": {
-    "@google/generative-ai": "^0.21.0",
-    "@langchain/community": "^0.3.28",
-    "@langchain/core": "^0.3.37",
-    "@langchain/google-vertexai": "^0.1.8",
-    "@langchain/mongodb": "^0.1.0",
-    "@langchain/openai": "^0.4.2",
     "axios": "^1.7.9",
-    "firebase-admin": "^13.0.2",
+    "firebase-admin": "^13.1.0",
     "firebase-functions": "^6.3.1",
-    "fs": "^0.0.1-security",
-    "langchain": "^0.3.15",
-    "mongodb": "^6.13.0",
-    "pdf-parse": "^1.1.1"
+    "mongodb": "^6.13.0"
   },
   "devDependencies": {
     "firebase-functions-test": "^3.4.0"
