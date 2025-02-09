@@ -163,3 +163,69 @@ exports.getProfileByGroup = async (groupId, userId) => {
         throw error;
     }
 };
+
+/*Reply messsage with stateless token*/
+exports.replyWithStateless = async (token, payload) => {
+    try {
+        const accessToken = await issueStatelessAccessToken();
+
+        const url = `${process.env.LINE_MESSAGING_API}/message/reply`;
+        const response = await axios.post(url, {
+            replyToken: token,
+            messages: payload
+        }, {
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (response.status === 200) {
+            return response.data;
+        } else {
+            throw new Error(`Failed to send reply. API responded with status: ${response.status}`);
+        }
+    } catch (error) {
+        console.error('Error in sending stateless reply:', error.message);
+        throw error;
+    }
+};
+
+
+/* 
+  # Stateless Channel Access Token
+  https://developers.line.biz/en/reference/messaging-api/#issue-stateless-channel-access-token
+  https://medium.com/linedevth/stateless-channel-access-token-e489dfc210ad
+
+  Issues channel access tokens that are only valid for 15 minutes. There is no limit to the number of tokens that can be issued. Once a stateless channel access token is issued, it can't be revoked.
+
+
+*/
+async function issueStatelessAccessToken() {
+    try {
+
+        let token = cache.getCache(process.env.LINE_MESSAGING_CHANNEL_ID);
+        if (token == undefined) {
+            const response = await axios.post(process.env.LINE_MESSAGING_OAUTH_ISSUE_TOKENV3, {
+                grant_type: 'client_credentials',
+                client_id: process.env.LINE_MESSAGING_CHANNEL_ID,
+                client_secret: process.env.LINE_MESSAGING_CHANNEL_SECRET
+            }, {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+            });
+
+            if (response.status === 200 && response.data && response.data.access_token) {
+                cache.setCache(process.env.LINE_MESSAGING_CHANNEL_ID, response.data.access_token)
+                return response.data.access_token;
+            } else {
+                throw new Error('Failed to obtain access token, check response for details.');
+            }
+        }
+        return token;
+    } catch (error) {
+        console.error('Error issuing token:', error.message);
+        throw error;
+    }
+}
