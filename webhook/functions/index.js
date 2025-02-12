@@ -16,17 +16,12 @@ exports.receive = onRequest({ invoker: "public" }, async (request, response) => 
     if (request.method !== "POST") {
         return response.status(200).send("Method Not Allowed");
     }
-    // if (!line.verifySignature(request.headers["x-line-signature"], request.body)) {
+    // if (!line.verifySignature(request.headers["x-line-signature"], request.rawBody)) {
     //     return response.status(401).send("Unauthorized");
     // }
 
     const events = request.body.events
     for (const event of events) {
-
-
-        if (event.source.type !== "group") {
-            return response.end();
-        }
 
         if (event.source.type !== "group") {
             await line.isAnimationLoading(event.source.userId)
@@ -116,8 +111,38 @@ exports.receive = onRequest({ invoker: "public" }, async (request, response) => 
                             break;
                     }
 
+
+
+
                 }
 
+                console.log(event);
+                /* 
+                https://developers.line.biz/en/reference/messaging-api/#webhook-event-objects
+                }*/
+                if (event.message.type === 'image') {
+
+                    console.log(event);
+
+                    /* ✅ 3.1 Get Content By API  
+                    https://developers.line.biz/en/reference/messaging-api/#get-content
+                    */
+                    const binary = await line.getContent(event.message.id)
+
+                    console.log(binary);
+
+
+                    return response.end();
+                }
+
+                /*
+                https://developers.line.biz/en/reference/messaging-api/#message-event
+                */
+                if (event.message.type === "location") {
+
+                    console.log(event);
+
+                }
                 break;
             case "postback":
                 const date = event.postback.params.date
@@ -146,9 +171,9 @@ exports.group = onRequest(async (request, response) => {
     if (request.method !== "POST") {
         return response.status(200).send("Method Not Allowed");
     }
-    // if (!line.verifySignature(request.headers["x-line-signature"], request.body)) {
-    //     return response.status(401).send("Unauthorized");
-    // }
+    if (!line.verifySignature(request.headers["x-line-signature"], request.rawBody)) {
+        return response.status(401).send("Unauthorized");
+    }
 
     const events = request.body.events
     for (const event of events) {
@@ -170,21 +195,21 @@ exports.group = onRequest(async (request, response) => {
                     },
                     "quickReply": {
                         "items": [{
-                                "type": "action",
-                                "action": {
-                                    "type": "uri",
-                                    "label": "add friend",
-                                    "uri": "https://line.me/R/ti/p/@xxxxx"
-                                }
-                            },
-                            {
-                                "type": "action",
-                                "action": {
-                                    "type": "uri",
-                                    "label": "share",
-                                    "uri": "https://line.me/R/nv/recommendOA/@xxxx"
-                                }
+                            "type": "action",
+                            "action": {
+                                "type": "uri",
+                                "label": "add friend",
+                                "uri": "https://line.me/R/ti/p/@xxxxx"
                             }
+                        },
+                        {
+                            "type": "action",
+                            "action": {
+                                "type": "uri",
+                                "label": "share",
+                                "uri": "https://line.me/R/nv/recommendOA/@xxxx"
+                            }
+                        }
                         ]
                     }
                 }])
@@ -203,7 +228,7 @@ exports.group = onRequest(async (request, response) => {
                         const profile = await line.getProfileByGroup(event.source.groupId, member.userId)
                         // "text": `สวัสดีคุณ ${profile.displayName} เข้าสู่กลุ่ม ${groupinfo.groupName} ครับ `,
 
-                        await mongo.upsertUserData(member.userId,event.source.groupId,profile)
+                        await mongo.upsertUserData(member.userId, event.source.groupId, profile)
 
                         await reply(event.replyToken, [{
                             "type": "textV2",
@@ -229,7 +254,7 @@ exports.group = onRequest(async (request, response) => {
                                 }
                             }
                         }])
-    
+
                     }
                 }
 
@@ -240,6 +265,8 @@ exports.group = onRequest(async (request, response) => {
                     if (member.type === "user") {
 
                         console.log(JSON.stringify(event));
+
+                        await mongo.deleteDataByGroupAndUserId(event.source.groupId, member.userId)
 
                     }
                 }
@@ -263,7 +290,7 @@ exports.group = onRequest(async (request, response) => {
 
                         for (let mentionee of event.message.mention.mentionees) {
                             if (mentionee.isSelf === true) {
-        
+
                                 await line.reply(event.replyToken, [{
                                     "type": "textV2",
                                     "text": "ว่ายังไงครับ ถามได้เลย {user1}",
@@ -284,10 +311,22 @@ exports.group = onRequest(async (request, response) => {
 
                 }
 
+
+
                 break;
         }
 
     }
+    return response.end();
+
+});
+
+exports.mongo = onRequest(async (request, response) => {
+
+    await mongo.connectDB()
+    console.log("🎉 MongoDB is ready to use!");
+    await mongo.disconnectDB();
+
     return response.end();
 
 });

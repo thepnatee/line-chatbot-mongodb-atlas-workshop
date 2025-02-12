@@ -204,24 +204,18 @@ exports.replyWithStateless = async (token, payload) => {
 async function issueStatelessAccessToken() {
     try {
 
-        let token = cache.getCache(process.env.LINE_MESSAGING_CHANNEL_ID);
-        if (token == undefined) {
-            const response = await axios.post(process.env.LINE_MESSAGING_OAUTH_ISSUE_TOKENV3, {
-                grant_type: 'client_credentials',
-                client_id: process.env.LINE_MESSAGING_CHANNEL_ID,
-                client_secret: process.env.LINE_MESSAGING_CHANNEL_SECRET
-            }, {
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-            });
+        const response = await axios.post(process.env.LINE_MESSAGING_OAUTH_ISSUE_TOKENV3, {
+            grant_type: 'client_credentials',
+            client_id: process.env.LINE_MESSAGING_CHANNEL_ID,
+            client_secret: process.env.LINE_MESSAGING_CHANNEL_SECRET
+        }, {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+        });
 
-            if (response.status === 200 && response.data && response.data.access_token) {
-                cache.setCache(process.env.LINE_MESSAGING_CHANNEL_ID, response.data.access_token)
-                return response.data.access_token;
-            } else {
-                throw new Error('Failed to obtain access token, check response for details.');
-            }
+        if (response.status === 200 && response.data && response.data.access_token) {
+            return response.data.access_token;
         }
         return token;
     } catch (error) {
@@ -229,3 +223,35 @@ async function issueStatelessAccessToken() {
         throw error;
     }
 }
+
+/*
+
+Get content
+https://developers.line.biz/en/reference/messaging-api/#get-content
+! Content is automatically deleted after a certain period from when the message was sent. There is no guarantee for how long content is stored.
+*/
+
+exports.getContent = async (messageId) => {
+
+    try {
+
+        const url = `${process.env.LINE_DATA_MESSAGING_API}/message/${messageId}/content`
+        const response = await axios.get(url, {
+            headers: {
+                'Authorization': `Bearer ${process.env.LINE_MESSAGING_ACCESS_TOKEN}`,
+            },
+            responseType: 'arraybuffer',
+        });
+
+        if (response.status === 200) {
+            return response.data
+        } else {
+            throw new Error(`Failed to fetch user profile. API responded with status: ${response.status}`);
+
+        }
+
+    } catch (error) {
+        console.error('Error Get Content:', error.response ? error.response.data : error.message);
+        throw error;
+    }
+};
