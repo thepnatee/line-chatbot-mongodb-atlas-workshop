@@ -16,6 +16,7 @@ exports.receive = onRequest({ invoker: "public" }, async (request, response) => 
     if (request.method !== "POST") {
         return response.status(200).send("Method Not Allowed");
     }
+    // TODO: Uncomment this line if you want to verify the signature
     // if (!line.verifySignature(request.headers["x-line-signature"], request.rawBody)) {
     //     return response.status(401).send("Unauthorized");
     // }
@@ -42,7 +43,7 @@ exports.receive = onRequest({ invoker: "public" }, async (request, response) => 
                 break;
             case "unfollow":
 
-                // console.log(JSON.stringify(event));
+                console.log(JSON.stringify(event));
 
                 break;
             case "message":
