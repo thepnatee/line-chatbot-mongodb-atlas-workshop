@@ -17,26 +17,26 @@
 ใน Workshop วันนี้เราจะครอบคลุมหัวข้อต่าง ๆ ดังนี้:
 
 ### LINE Messaging API
-✅ ทำความเข้าใจ LINE API และการใช้งาน
-✅ การทำงานของ Webhook
-✅ การจัดการ Webhook Events
-✅ การสร้าง ข้อความโต้ตอบอัตโนมัติ (Message Objects & Actions)
-✅ การสร้าง Chatbot ด้วย Cloud Functions for Firebase
-✅ เทคนิคการส่งข้อความขั้นสูง (Push & Reply Message)
-✅ ความปลอดภัยในการพัฒนา LINE Chatbot
+- ✅ ทำความเข้าใจ LINE API และการใช้งาน
+- ✅ การทำงานของ Webhook
+- ✅ การจัดการ Webhook Events
+- ✅ การสร้าง ข้อความโต้ตอบอัตโนมัติ (Message Objects & Actions)
+- ✅ การสร้าง Chatbot ด้วย Cloud Functions for Firebase
+- ✅ เทคนิคการส่งข้อความขั้นสูง (Push & Reply Message)
+- ✅ ความปลอดภัยในการพัฒนา LINE Chatbot
 
 ### Flex Message
-✅ ทำความเข้าใจ Flex Message
-✅ ใช้ Flex Message Simulator สร้างดีไซน์สวย ๆ
-✅ ใช้ ChatGPT ช่วยสร้าง Flex Messages
+- ✅ ทำความเข้าใจ Flex Message
+- ✅ ใช้ Flex Message Simulator สร้างดีไซน์สวย ๆ
+- ✅ ใช้ ChatGPT ช่วยสร้าง Flex Messages
 
 ### Rich Menu
-✅ วิธีสร้าง Rich Menu ด้วย Messaging API
-✅ การใช้ Rich Menu Aliases
-✅ การทำ Rich Menu Switch Actions
+- ✅ วิธีสร้าง Rich Menu ด้วย Messaging API
+- ✅ การใช้ Rich Menu Aliases
+- ✅ การทำ Rich Menu Switch Actions
 
 ####  Workshop & showcase 
-A. Chatbot Connect MongoDB Atlas
+- Chatbot Connect MongoDB Atlas
 
 ### ประโยชน์ที่ทุกคนจะได้ใน Workshop นี้
 - ผู้เรียนได้รู้จัก LINE API มากขึ้น 
