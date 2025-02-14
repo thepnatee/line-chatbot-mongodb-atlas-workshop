@@ -29,12 +29,13 @@ exports.disconnectDB = async () => {
     }
 };
 
-exports.upsertUserData = async (userId, groupId, data) => {
+exports.upsertUserData = async (groupId, userId,  data) => {
     if (!userId || !data) {
         throw new Error("❌ Missing required parameters: userId and data are required.");
     }
 
     try {
+        await client.connect();
         const db = client.db();
         const collection = db.collection("user_group");
 
@@ -58,17 +59,16 @@ exports.upsertUserData = async (userId, groupId, data) => {
 
 
 exports.getUserData = async (userId, groupId = null) => {
-    if (!userId) {
-        throw new Error("❌ Missing required parameter: userId is required.");
-    }
 
     try {
+        await client.connect();
         const db = client.db();
         const collection = db.collection("user_group");
 
-        const filter = { userId };
-        if (groupId) filter.groupId = groupId;
+        // const filter = { userId };
+        // if (groupId) filter.groupId = groupId;
 
+        const filter = { userId, groupId };
         const result = await collection.findOne(filter);
 
         if (!result) {
@@ -92,6 +92,8 @@ exports.deleteDataByGroupId = async (groupId) => {
     }
 
     try {
+
+        await client.connect();
         const db = client.db();
         const collection = db.collection("user_group");
 
@@ -104,7 +106,7 @@ exports.deleteDataByGroupId = async (groupId) => {
         console.error("❌ Error in deleteDataByGroupId:", error.message);
         throw error;
     } finally {
-        await disconnectDB(); // ✅ ปิด Connection หลังใช้งาน
+        await this.disconnectDB(); // ✅ ปิด Connection หลังใช้งาน
     }
 };
 
@@ -114,6 +116,7 @@ exports.deleteDataByGroupAndUserId = async (groupId, userId) => {
     }
 
     try {
+        await client.connect();
         const db = client.db();
         const collection = db.collection("user_group");
 
@@ -125,6 +128,6 @@ exports.deleteDataByGroupAndUserId = async (groupId, userId) => {
         console.error("❌ Error in deleteDataByGroupAndUserId:", error.message);
         throw error;
     } finally {
-        await disconnectDB(); // ✅ ปิด Connection หลังใช้งาน
+        await this.disconnectDB(); // ✅ ปิด Connection หลังใช้งาน
     }
 };
