@@ -1,11 +1,14 @@
 const { setGlobalOptions } = require("firebase-functions/v2");
 const { onRequest } = require("firebase-functions/v2/https");
-const messages = require('./message/messages');
-const flex = require('./message/flex');
+// const messages = require('./message/messages');
+// const flex = require('./message/flex');
 const line = require('./util/line.util');
-const mongo = require('./util/mongo.util');
+// const mongo = require('./util/mongo.util');
 
-
+/**
+ * Firebase Functions 2nd Generation
+ * https://firebase.google.com/docs/reference/functions/2nd-gen/node/firebase-functions.globaloptions
+ */
 setGlobalOptions({
     region: "asia-northeast1",
     memory: "1GB",
