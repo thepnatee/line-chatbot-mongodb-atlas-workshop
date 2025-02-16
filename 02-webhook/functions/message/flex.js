@@ -4,58 +4,218 @@ exports.profile = (pictureUrl, name) => {
         "altText": "Profile",
         "contents": {
             "type": "bubble",
-            "size": "mega",
-            "hero": {
-                "type": "box",
-                "layout": "vertical",
-                "contents": [{
-                    "type": "image",
-                    "url": "https://mpics.mgronline.com/pics/Images/564000004884401.JPEG",
-                    "aspectMode": "cover",
-                    "align": "center",
-                    "aspectRatio": "16:9"
-                }],
-                "height": "50px",
-                "backgroundColor": "#138f2d"
-            },
+            "size": "giga",
             "body": {
-                "type": "box",
-                "layout": "vertical",
-                "contents": [{
-                        "type": "text",
-                        "text": name,
-                        "weight": "bold",
-                        "size": "xl",
-                        "align": "center",
-                        "offsetBottom": "10px"
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "RECEIPT",
+                  "weight": "bold",
+                  "color": "#1DB446",
+                  "size": "sm"
+                },
+                {
+                  "type": "text",
+                  "text": "Brown Store",
+                  "weight": "bold",
+                  "size": "xxl",
+                  "margin": "md"
+                },
+                {
+                  "type": "text",
+                  "text": "Flex Tower, 7-7-4 Midori-ku, Tokyo",
+                  "size": "xs",
+                  "color": "#aaaaaa",
+                  "wrap": true
+                },
+                {
+                  "type": "separator",
+                  "margin": "xxl"
+                },
+                {
+                  "type": "box",
+                  "layout": "vertical",
+                  "margin": "xxl",
+                  "spacing": "sm",
+                  "contents": [
+                    {
+                      "type": "box",
+                      "layout": "horizontal",
+                      "contents": [
+                        {
+                          "type": "text",
+                          "text": "Energy Drink",
+                          "size": "sm",
+                          "color": "#555555",
+                          "flex": 0
+                        },
+                        {
+                          "type": "text",
+                          "text": "$2.99",
+                          "size": "sm",
+                          "color": "#111111",
+                          "align": "end"
+                        }
+                      ]
                     },
                     {
-                        "type": "image",
-                        "url": pictureUrl,
-                        "align": "center",
-                        "size": "100%",
-                        "aspectMode": "cover",
-                        "aspectRatio": "3:4"
+                      "type": "box",
+                      "layout": "horizontal",
+                      "contents": [
+                        {
+                          "type": "text",
+                          "text": "Chewing Gum",
+                          "size": "sm",
+                          "color": "#555555",
+                          "flex": 0
+                        },
+                        {
+                          "type": "text",
+                          "text": "$0.99",
+                          "size": "sm",
+                          "color": "#111111",
+                          "align": "end"
+                        }
+                      ]
                     },
                     {
-                        "type": "text",
-                        "text": "Software Developer",
-                        "size": "md",
-                        "color": "#aaaaaa",
-                        "align": "center"
+                      "type": "box",
+                      "layout": "horizontal",
+                      "contents": [
+                        {
+                          "type": "text",
+                          "text": "Bottled Water",
+                          "size": "sm",
+                          "color": "#555555",
+                          "flex": 0
+                        },
+                        {
+                          "type": "text",
+                          "text": "$3.33",
+                          "size": "sm",
+                          "color": "#111111",
+                          "align": "end"
+                        }
+                      ]
                     },
                     {
-                        "type": "text",
-                        "text": "Employee ID: 12345678",
-                        "size": "sm",
-                        "color": "#aaaaaa",
-                        "align": "center",
-                        "margin": "sm"
+                      "type": "separator",
+                      "margin": "xxl"
+                    },
+                    {
+                      "type": "box",
+                      "layout": "horizontal",
+                      "margin": "xxl",
+                      "contents": [
+                        {
+                          "type": "text",
+                          "text": "ITEMS",
+                          "size": "sm",
+                          "color": "#555555"
+                        },
+                        {
+                          "type": "text",
+                          "text": "3",
+                          "size": "sm",
+                          "color": "#111111",
+                          "align": "end"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "box",
+                      "layout": "horizontal",
+                      "contents": [
+                        {
+                          "type": "text",
+                          "text": "TOTAL",
+                          "size": "sm",
+                          "color": "#555555"
+                        },
+                        {
+                          "type": "text",
+                          "text": "$7.31",
+                          "size": "sm",
+                          "color": "#111111",
+                          "align": "end"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "box",
+                      "layout": "horizontal",
+                      "contents": [
+                        {
+                          "type": "text",
+                          "text": "CASH",
+                          "size": "sm",
+                          "color": "#555555"
+                        },
+                        {
+                          "type": "text",
+                          "text": "$8.0",
+                          "size": "sm",
+                          "color": "#111111",
+                          "align": "end"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "box",
+                      "layout": "horizontal",
+                      "contents": [
+                        {
+                          "type": "text",
+                          "text": "CHANGE",
+                          "size": "sm",
+                          "color": "#555555"
+                        },
+                        {
+                          "type": "text",
+                          "text": "$0.69",
+                          "size": "sm",
+                          "color": "#111111",
+                          "align": "end"
+                        }
+                      ]
                     }
-                ],
-                "backgroundColor": "#f0f4f8"
+                  ]
+                },
+                {
+                  "type": "separator",
+                  "margin": "xxl"
+                },
+                {
+                  "type": "box",
+                  "layout": "horizontal",
+                  "margin": "md",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "PAYMENT ID",
+                      "size": "xs",
+                      "color": "#aaaaaa",
+                      "flex": 0
+                    },
+                    {
+                      "type": "text",
+                      "text": "#743289384279",
+                      "color": "#aaaaaa",
+                      "size": "xs",
+                      "align": "end"
+                    }
+                  ]
+                }
+              ]
+            },
+            "styles": {
+              "footer": {
+                "separator": true
+              }
             }
-        }
+          }
     }
 }
 

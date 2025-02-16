@@ -66,10 +66,7 @@ exports.welcomeBack = (profile) => {
     return {
         "type": "text",
         "text": `อ้าววคุณ ${profile.displayName} สบายดีไหมครับ`,
-        "sender": {
-            "name": "BOT",
-            "iconUrl": "https://cdn-icons-png.flaticon.com/512/10176/10176915.png "
-        },
+         
         "quickReply": {
             "items": [{
                     "type": "action",

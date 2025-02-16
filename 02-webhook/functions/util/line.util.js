@@ -1,5 +1,5 @@
 const axios = require("axios");
-const crypto = require('crypto');
+
 
 
 /*
@@ -32,25 +32,6 @@ exports.getProfile = async (userId) => {
     }
 };
 
-
-/*
-#verify-signature
-https://developers.line.biz/en/docs/messaging-api/receiving-messages/#verify-signature
-https://medium.com/linedevth/7a94d9548f34
-
-When your bot server receives a request, verify the request sender. To make sure the request is from the LINE Platform, make your bot server verify the signature in the x-line-signature request header.
-*/
-exports.verifySignature = (originalSignature, body) => {
-    const signature = crypto
-        .createHmac("SHA256", process.env.LINE_MESSAGING_CHANNEL_SECRET)
-        .update(JSON.stringify(body))
-        .digest("base64");
-
-    if (signature !== originalSignature) {
-        return false;
-    }
-    return true;
-};
 
 /*
 #Display a loading animation
